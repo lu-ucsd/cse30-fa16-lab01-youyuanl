@@ -67,8 +67,8 @@ int test_bitAnd(int x, int y)
 }
 int test_getByte(int x, int n)
 {
-    unsigned char byte;
-    switch(n) {
+  unsigned char byte;
+  switch(n) {
     case 0:
       byte = x;
       break;
@@ -81,8 +81,8 @@ int test_getByte(int x, int n)
     default:
       byte = x >> 24;
       break;
-    }
-    return (int) (unsigned) byte;
+  }
+  return (int) (unsigned) byte;
 }
 int test_logicalShift(int x, int n) {
   unsigned u = (unsigned) x;
@@ -111,8 +111,8 @@ int test_fitsBits(int x, int n)
 }
 int test_divpwr2(int x, int n)
 {
-    int p2n = 1<<n;
-    return x/p2n;
+  int p2n = 1<<n;
+  return x/p2n;
 }
 int test_negate(int x) {
   return -x;
@@ -136,12 +136,12 @@ int test_ilog2(int x) {
   return result;
 }
 unsigned test_float_neg(unsigned uf) {
-    float f = u2f(uf);
-    float nf = -f;
-    if (isnan(f))
- return uf;
-    else
- return f2u(nf);
+  float f = u2f(uf);
+  float nf = -f;
+  if (isnan(f))
+    return uf;
+  else
+    return f2u(nf);
 }
 unsigned test_float_i2f(int x) {
   float f = (float) x;
@@ -159,15 +159,136 @@ unsigned test_float_twice(unsigned uf) {
 
 int main(int argc, char *argv[]){
 
-//Test Cases for bitAnd 
+  //Test Cases for bitAnd 
 
-assert(bitAnd(7,8)==test_bitAnd(7,8)); 
-assert(bitAnd(1,3)==test_bitAnd(1,3));
-assert(bitAnd(9,8)==test_bitAnd(9,8));
-assert(bitAnd(0,6)==test_bitAnd(0,6));
-assert(bitAnd(255,254)==test_bitAnd(255,254));
-printf("Passed Test Cases for bitAnd\n");
+  assert(bitAnd(7,8)==test_bitAnd(7,8)); 
+  assert(bitAnd(1,3)==test_bitAnd(1,3));
+  assert(bitAnd(9,8)==test_bitAnd(9,8));
+  assert(bitAnd(0,6)==test_bitAnd(0,6));
+  assert(bitAnd(255,254)==test_bitAnd(255,254));
+  printf("Passed Test Cases for bitAnd\n");
 
-return 0;
+  //Test Cases for getByte
 
+  assert(getByte(0, 3)==test_getByte(0, 3));
+  assert(getByte(0xffffffff, 2)==test_getByte(0xffffffff, 2));
+  assert(getByte(0xf0f0f0f0, 1)==test_getByte(0xf0f0f0f0, 1));
+  assert(getByte(123456, 0)==test_getByte(123456, 0));
+  assert(getByte(-123456, 3)==test_getByte(-123456, 3));
+  printf("Passed Test Cases for getByte\n");
+
+  //Test Cases for logicalShift
+
+  assert(logicalShift(0, 3)==test_logicalShift(0, 3));
+  assert(logicalShift(0xfffff, 2)==test_logicalShift(0xfffff, 2));
+  assert(logicalShift(0xf0f0f, 1)==test_logicalShift(0xf0f0f, 1));
+  assert(logicalShift(123456, 2)==test_logicalShift(123456, 2));
+  assert(logicalShift(-123456, 3)==test_logicalShift(-123456, 3));
+  printf("Passed Test Cases for logicalShift\n");
+
+  //Test Cases for bitCount
+
+  assert(bitCount(0)==test_bitCount(0));
+  assert(bitCount(0xffffffff)==test_bitCount(0xffffffff));
+  assert(bitCount(0xf0f0f0f0)==test_bitCount(0xf0f0f0f0));
+  assert(bitCount(123456)==test_bitCount(123456));
+  assert(bitCount(-123456)==test_bitCount(-123456));
+  printf("Passed Test Cases for bitCount\n");
+
+  //Test Cases for bang
+
+  assert(bang(0xffffffff)==test_bang(0xffffffff));
+  assert(bang(0)==test_bang(0));
+  assert(bang(0xfffffff)==test_bang(0xfffffff));
+  assert(bang(-123456)==test_bang(-123456));
+  assert(bang(123456)==test_bang(123456));
+  printf("Passed Test Cases for bang\n");
+
+  //Test Case for tmin
+
+  assert(tmin()==test_tmin());
+  printf("Passed Test Case for tmin\n");
+
+  //Test Cases for fitsBits
+
+  assert(fitsBits(0, 3)==test_fitsBits(0, 3));
+  assert(fitsBits(0xffffff, 6)==test_fitsBits(0xffffff, 6));
+  assert(fitsBits(0xf0f0f0, 7)==test_fitsBits(0xf0f0f0, 7));
+  assert(fitsBits(123456, 4)==test_fitsBits(123456, 4));
+  assert(fitsBits(-123456, 3)==test_fitsBits(-123456, 3));
+  printf("Passed Test Cases for fitsBIts\n");
+
+  //Test Cases for divpwr2
+
+  assert(divpwr2(0xfffffff, 23)==test_divpwr2(0xfffffff, 23));
+  assert(divpwr2(0xf0000000, 15)==test_divpwr2(0xf0000000, 15));
+  assert(divpwr2(0, 3)==test_divpwr2(0, 3));
+  assert(divpwr2(137, 5)==test_divpwr2(137, 5));
+  assert(divpwr2(-137, 5)==test_divpwr2(-137, 5));
+  printf("Passed Test Cases for divpwr2\n");
+
+  //Test Cases for negate
+
+  assert(negate(0)==test_negate(0));
+  assert(negate(0xffffffff)==test_negate(0xffffffff));
+  assert(negate(0xf0f0f0f0)==test_negate(0xf0f0f0f0));
+  assert(negate(123456)==test_negate(123456));
+  assert(negate(-123456)==test_negate(-123456));
+  printf("Passed Test Cases for negate\n");
+
+  //Test Cases for isPositive
+
+  assert(isPositive(0)==test_isPositive(0));
+  assert(isPositive(0xfffffff)==test_isPositive(0xfffffff));
+  assert(isPositive(0xf0f0f0f0)==test_isPositive(0xf0f0f0f0));
+  assert(isPositive(123456)==test_isPositive(123456));
+  assert(isPositive(-123456)==test_isPositive(-123456));
+  printf("Passed Test Cases for isPositive\n");
+
+  //Test Cases for isLessOrEqual
+
+  assert(isLessOrEqual(-3, 2)==test_isLessOrEqual(-3, 2));
+  assert(isLessOrEqual(-3, 0)==test_isLessOrEqual(-3, 0));
+  assert(isLessOrEqual(0, 2)==test_isLessOrEqual(0, 2));
+  assert(isLessOrEqual(2, 2)==test_isLessOrEqual(2, 2));
+  assert(isLessOrEqual(2, -3)==test_isLessOrEqual(2, -3));
+  printf("Passed Test Cases for isLessOrEqual\n");
+
+  //Test Cases for ilog2
+
+  assert(ilog2(1)==test_ilog2(1));
+  assert(ilog2(0xfffffff)==test_ilog2(0xfffffff));
+  assert(ilog2(0xf0f0f)==test_ilog2(0xf0f0f));
+  assert(ilog2(123456)==test_ilog2(123456));
+  assert(ilog2(256)==test_ilog2(256));
+  printf("Passed Test Cases for ilog2\n");
+
+  //Test Cases for float_neg
+
+  assert(float_neg(0xffffffff)==test_float_neg(0xffffffff));
+  assert(float_neg(0)==test_float_neg(0));
+  assert(float_neg(0xff800000)==test_float_neg(0xff800000));
+  assert(float_neg(0x7f800000)==test_float_neg(0x7f800000));
+  assert(float_neg(0x11000010)==test_float_neg(0x11000010));
+  printf("Passed Test Cases for float_neg\n");
+
+  //Test Cases for float_i2f
+
+  assert(float_i2f(0)==test_float_i2f(0));
+  assert(float_i2f(-12345)==test_float_i2f(-12345));;
+  assert(float_i2f(12345)==test_float_i2f(12345));;
+  assert(float_i2f(-67890)==test_float_i2f(-67890));;
+  assert(float_i2f(67890)==test_float_i2f(67890));;
+  printf("Passed Test Cases for float_i2f\n");
+
+  //Test Cases for float_twice
+
+  assert(float_twice(0xffffffff)==test_float_twice(0xffffffff));
+  assert(float_twice(0xff800000)==test_float_twice(0xff800000));
+  assert(float_twice(0x7f000001)==test_float_twice(0x7f000001));
+  assert(float_twice(0x1f000001)==test_float_twice(0x1f000001));
+  assert(float_twice(0x77777777)==test_float_twice(0x77777777));
+  printf("Passed Test Cases for float_twice\n");
+
+  return 0;
 }
