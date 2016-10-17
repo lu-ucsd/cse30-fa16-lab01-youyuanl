@@ -185,7 +185,7 @@ For the problems that require you to implent floating-point operations,
  *   Rating: 2
  */
 int getByte(int x, int n) {
-  /* shift x right 8n bits and mask it to get the result */
+  /* shift x right (8 * n) bits and mask it to get the result */
   return (x >> (n << 3)) & 0xff;
 }
 /* 
